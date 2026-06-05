@@ -1,207 +1,3083 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Professional Light Design</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR ESSENCE - Luxury Perfumes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Raleway:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fdfbf7 0%, #f5f7ff 50%, #f0f4ff 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      overflow-x: hidden;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* ── Card Container ── */
-    .card {
-      position: relative;
-      width: 100%;
-      max-width: 920px;
-      min-height: 600px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      border-radius: 32px;
-      box-shadow: 0 28px 60px -15px rgba(0, 0, 0, 0.06);
-      padding: 64px 48px;
-      margin: 20px;
-      overflow: hidden;
-      animation: fadeInUp 0.8s ease-out;
-    }
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --bg-card: #111111;
+            --bg-card-hover: #1a1a1a;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07c2a;
+            --text-light: #f5f5f5;
+            --text-muted: #888888;
+            --text-dim: #555555;
+            --accent-rose: #8b3a4a;
+            --accent-purple: #4a2a6b;
+            --border-color: #222222;
+            --overlay: rgba(0, 0, 0, 0.7);
+        }
 
-    /* ── Soft Decorative Blobs ── */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.65;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .blob-1 { width: 320px; height: 320px; background: #e0c3fc; top: -70px; right: -50px; }
-    .blob-2 { width: 260px; height: 260px; background: #c3f0e0; bottom: -40px; left: -30px; }
-    .blob-3 { width: 190px; height: 190px; background: #ffc3b3; top: 45%; left: 65%; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── Content Wrapper ── */
-    .content {
-      position: relative;
-      z-index: 2;
-      max-width: 620px;
-    }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
 
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.95);
-      color: #6b7280;
-      padding: 9px 18px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-      margin-bottom: 26px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-dark);
+            border-radius: 4px;
+        }
 
-    h1 {
-      font-size: clamp(48px, 8vw, 92px);
-      font-weight: 800;
-      line-height: 1.05;
-      color: #1f2937;
-      letter-spacing: -2.5px;
-      margin-bottom: 22px;
-    }
+        /* ============ HEADER / NAVBAR ============ */
+        .top-bar {
+            background: var(--bg-darker);
+            text-align: center;
+            padding: 8px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    h1 .accent {
-      background: linear-gradient(135deg, #c4b5fd, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-    p {
-      font-size: clamp(16px, 2vw, 20px);
-      line-height: 1.7;
-      color: #4b5563;
-      margin-bottom: 34px;
-      max-width: 580px;
-    }
+        header.scrolled .navbar {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 10px 0;
+        }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      background: linear-gradient(135deg, #c4b5fd, #a5b4fc);
-      color: #1f2937;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 600;
-      padding: 15px 30px;
-      border-radius: 16px;
-      box-shadow: 0 12px 28px rgba(165, 180, 252, 0.32);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: none;
-      cursor: pointer;
-    }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 35px rgba(165, 180, 252, 0.45);
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
 
-    .btn svg {
-      width: 18px;
-      height: 18px;
-      transition: transform 0.3s ease;
-    }
-    .btn:hover svg {
-      transform: translateX(4px);
-    }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
 
-    /* ── Footer Note ── */
-    .footer-note {
-      position: absolute;
-      right: 48px;
-      bottom: 48px;
-      z-index: 2;
-      font-size: 14px;
-      color: #9ca3af;
-      text-align: right;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
 
-    /* ── Animations ── */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .card {
-        padding: 44px 28px;
-        min-height: 520px;
-      }
-      .content {
-        text-align: center;
-      }
-      .tag, .btn {
-        margin: 0 auto;
-      }
-      .footer-note {
-        position: static;
-        margin-top: 32px;
-        text-align: center;
-      }
-    }
-  </style>
+        .logo-text .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 4px;
+            line-height: 1;
+        }
+
+        .logo-text .brand-tagline {
+            font-family: 'Great Vibes', cursive;
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+        }
+
+        .nav-icon:hover {
+            color: var(--gold);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.4) 0%,
+                rgba(0,0,0,0.2) 40%,
+                rgba(0,0,0,0.6) 100%
+            );
+        }
+
+        .hero-slide:nth-child(1) {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a20 30%, #0a0a1a 60%, #0a0a0a 100%);
+        }
+
+        .hero-slide:nth-child(2) {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #200a10 60%, #0a0a0a 100%);
+        }
+
+        .hero-slide:nth-child(3) {
+            background: linear-gradient(135deg, #0a0a0a 0%, #0a1a0a 30%, #0a0a1a 60%, #0a0a0a 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content .subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease 0.5s both;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+            color: var(--bg-dark);
+        }
+
+        .hero-indicators {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 5;
+        }
+
+        .hero-indicator {
+            width: 40px;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .hero-indicator.active {
+            background: var(--gold);
+            width: 60px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-down svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--gold);
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============ FLOATING PERFUME BOTTLES (Hero Decoration) ============ */
+        .hero-bottle {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .hero-bottle-left {
+            left: 5%;
+            top: 20%;
+            width: 200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-bottle-right {
+            right: 5%;
+            bottom: 20%;
+            width: 180px;
+            animation: float 6s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(3deg); }
+        }
+
+        /* ============ SECTION STYLES ============ */
+        .section {
+            padding: 100px 60px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .section-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 3px;
+        }
+
+        .section-header .section-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 20px auto;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ============ CATEGORIES ============ */
+        .categories {
+            background: var(--bg-darker);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+
+        .category-card .category-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:nth-child(1) .category-bg {
+            background: linear-gradient(135deg, #1a0a20, #2a1040);
+        }
+        .category-card:nth-child(2) .category-bg {
+            background: linear-gradient(135deg, #200a10, #3a1020);
+        }
+        .category-card:nth-child(3) .category-bg {
+            background: linear-gradient(135deg, #0a1a1a, #103030);
+        }
+        .category-card:nth-child(4) .category-bg {
+            background: linear-gradient(135deg, #1a1a0a, #303010);
+        }
+
+        .category-card:hover .category-bg {
+            transform: scale(1.1);
+        }
+
+        .category-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        .category-icon svg {
+            width: 80px;
+            height: 80px;
+            fill: var(--gold);
+        }
+
+        .category-card .category-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            z-index: 2;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .category-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--gold-light);
+        }
+
+        .category-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* ============ FEATURED / BIG PHOTO SECTION ============ */
+        .featured-banner {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a, #150a1a, #0a0a15);
+        }
+
+        .featured-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 70% 50%, rgba(201, 168, 76, 0.08), transparent 60%);
+        }
+
+        .featured-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 100px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-text {
+            max-width: 500px;
+        }
+
+        .featured-text .label {
+            display: inline-block;
+            padding: 5px 15px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .featured-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .featured-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .featured-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .featured-price span {
+            font-size: 1rem;
+            color: var(--text-dim);
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .featured-image {
+            position: relative;
+        }
+
+        .featured-image .bottle-glow {
+            width: 400px;
+            height: 500px;
+            position: relative;
+        }
+
+        .bottle-glow::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.15), transparent);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bottle-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottle-placeholder svg {
+            width: 200px;
+            height: 350px;
+            filter: drop-shadow(0 0 40px rgba(201, 168, 76, 0.3));
+        }
+
+        /* ============ PRODUCTS GRID ============ */
+        .products {
+            background: var(--bg-dark);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .filter-tab {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 10px 20px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            color: var(--gold);
+        }
+
+        .filter-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            border-color: var(--gold-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gold);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+            z-index: 3;
+        }
+
+        .product-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            transition: all 0.3s;
+        }
+
+        .product-wishlist svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: var(--text-light);
+            stroke-width: 2;
+            transition: all 0.3s;
+        }
+
+        .product-wishlist:hover svg,
+        .product-wishlist.active svg {
+            fill: #e74c3c;
+            stroke: #e74c3c;
+        }
+
+        .product-image {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image .product-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-bg {
+            transform: scale(1.05);
+        }
+
+        .product-image svg {
+            position: relative;
+            z-index: 2;
+            width: 80px;
+            height: 160px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image svg {
+            transform: scale(1.1);
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            z-index: 3;
+            transition: bottom 0.3s;
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+
+        .product-actions button {
+            flex: 1;
+            padding: 10px;
+            background: var(--gold);
+            border: none;
+            color: var(--bg-dark);
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .product-actions button:hover {
+            background: var(--gold-light);
+        }
+
+        .product-actions button.quick-view {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+        }
+
+        .product-actions button.quick-view:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-brand {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .product-notes {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        .rating-count {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-price .current {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+
+        .product-price .original {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-decoration: line-through;
+        }
+
+        .product-size {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 5px;
+        }
+
+        /* ============ BIG PARALLAX SECTION ============ */
+        .parallax-section {
+            height: 70vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0508, #1a0a15, #0a0a15, #0a0508);
+            overflow: hidden;
+        }
+
+        .parallax-section::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.05), transparent);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .parallax-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .parallax-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .parallax-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        /* ============ BESTSELLERS (Big Cards) ============ */
+        .bestsellers {
+            background: var(--bg-darker);
+        }
+
+        .bestseller-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .bestseller-card {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .bestseller-card:hover {
+            border-color: var(--gold-dark);
+        }
+
+        .bestseller-card .bs-image {
+            width: 45%;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bestseller-card .bs-image svg {
+            width: 100px;
+            height: 200px;
+            z-index: 2;
+            position: relative;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+
+        .bestseller-card .bs-info {
+            padding: 40px;
+            flex: 1;
+        }
+
+        .bestseller-card .bs-rank {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--border-color);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .bestseller-card .bs-brand {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .bestseller-card .bs-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .bestseller-card .bs-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .bestseller-card .bs-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .bestseller-card .btn {
+            padding: 12px 30px;
+            font-size: 0.75rem;
+        }
+
+        /* ============ TESTIMONIALS ============ */
+        .testimonials {
+            background: var(--bg-dark);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--gold-dark);
+        }
+
+        .testimonial-card .quote-icon {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .testimonial-card .review-text {
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-card .reviewer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--bg-dark);
+            font-weight: 700;
+        }
+
+        .reviewer-info .reviewer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        .reviewer-info .reviewer-title {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        /* ============ BRAND STORY ============ */
+        .brand-story {
+            display: flex;
+            min-height: 80vh;
+            overflow: hidden;
+        }
+
+        .brand-story-image {
+            width: 50%;
+            position: relative;
+            background: linear-gradient(135deg, #1a0a10, #2a1525);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-story-image svg {
+            width: 300px;
+            height: 400px;
+            opacity: 0.3;
+        }
+
+        .brand-story-text {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            padding: 80px;
+            background: var(--bg-darker);
+        }
+
+        .brand-story-text .content {
+            max-width: 500px;
+        }
+
+        .brand-story-text .subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .brand-story-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .brand-story-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .brand-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .brand-stat h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .brand-stat p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ============ NEWSLETTER ============ */
+        .newsletter {
+            background: linear-gradient(135deg, var(--bg-darker), #0a0508, var(--bg-darker));
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.03), transparent);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .newsletter p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--gold);
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background: var(--gold);
+            border: none;
+            color: var(--bg-dark);
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--gold-light);
+        }
+
+        /* ============ INSTAGRAM FEED ============ */
+        .instagram-section {
+            padding: 80px 0 0;
+            background: var(--bg-dark);
+        }
+
+        .instagram-section .section-header {
+            padding: 0 60px;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 5px;
+        }
+
+        .instagram-item {
+            aspect-ratio: 1;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .instagram-item .ig-bg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+        }
+
+        .instagram-item:nth-child(1) .ig-bg { background: linear-gradient(135deg, #1a0a1a, #2a1535); }
+        .instagram-item:nth-child(2) .ig-bg { background: linear-gradient(135deg, #0a1a1a, #152a25); }
+        .instagram-item:nth-child(3) .ig-bg { background: linear-gradient(135deg, #1a1a0a, #2a2515); }
+        .instagram-item:nth-child(4) .ig-bg { background: linear-gradient(135deg, #1a0a0a, #2a1515); }
+        .instagram-item:nth-child(5) .ig-bg { background: linear-gradient(135deg, #0a0a1a, #15152a); }
+        .instagram-item:nth-child(6) .ig-bg { background: linear-gradient(135deg, #1a0a15, #2a152a); }
+
+        .instagram-item:hover .ig-bg {
+            transform: scale(1.1);
+        }
+
+        .instagram-item .ig-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(201, 168, 76, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .instagram-item:hover .ig-overlay {
+            opacity: 1;
+        }
+
+        .ig-overlay svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            padding: 80px 60px 40px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            border-color: var(--gold);
+            background: var(--gold);
+        }
+
+        .social-link svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-muted);
+            transition: fill 0.3s;
+        }
+
+        .social-link:hover svg {
+            fill: var(--bg-dark);
+        }
+
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+        }
+
+        .footer-contact p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .payment-methods span {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            padding: 5px 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ============ SEARCH OVERLAY ============ */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .search-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .search-container {
+            width: 600px;
+            max-width: 90%;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--gold);
+            color: var(--text-light);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            outline: none;
+            text-align: center;
+        }
+
+        .search-container input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .close-search {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close-search svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--text-light);
+            stroke-width: 2;
+        }
+
+        /* ============ CART SIDEBAR ============ */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100%;
+            background: var(--bg-card);
+            z-index: 2001;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-light);
+            stroke-width: 2;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1a1020, #251535);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image svg {
+            width: 30px;
+            height: 60px;
+            fill: var(--gold);
+            opacity: 0.5;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-details h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .cart-item-details .item-brand {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-qty button {
+            width: 25px;
+            height: 25px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-qty span {
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+            text-align: right;
+        }
+
+        .cart-item-remove {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            text-align: right;
+            margin-top: 5px;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .cart-item-remove:hover {
+            color: #e74c3c;
+        }
+
+        .cart-footer {
+            padding: 25px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .cart-total span:first-child {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cart-total span:last-child {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+
+        .cart-footer .btn {
+            width: 100%;
+            text-align: center;
+            display: block;
+        }
+
+        .cart-footer .btn + .btn {
+            margin-top: 10px;
+        }
+
+        /* ============ MOBILE MENU ============ */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-darker);
+            z-index: 1500;
+            transition: left 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 15px 0;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-close svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--text-light);
+            stroke-width: 2;
+        }
+
+        /* ============ FEATURES BAR ============ */
+        .features-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 30px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .feature-item:last-child {
+            border-right: none;
+        }
+
+        .feature-item svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .feature-item .feature-text h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .feature-item .feature-text p {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        /* ============ BACK TO TOP ============ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--gold);
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--bg-dark);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1200px) {
+            .navbar { padding: 15px 30px; }
+            .section { padding: 80px 30px; }
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-main { grid-template-columns: repeat(3, 1fr); padding: 60px 30px; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .categories-grid { grid-template-columns: repeat(2, 1fr); }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .bestseller-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
+            .featured-content { flex-direction: column; text-align: center; padding: 60px 30px; }
+            .featured-image { order: -1; }
+            .featured-text { max-width: 100%; }
+            .brand-story { flex-direction: column; }
+            .brand-story-image, .brand-story-text { width: 100%; }
+            .brand-story-text { padding: 60px 30px; }
+            .features-bar { grid-template-columns: repeat(2, 1fr); }
+            .feature-item:nth-child(2) { border-right: none; }
+            .footer-main { grid-template-columns: repeat(2, 1fr); }
+            .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .section-header h2 { font-size: 2rem; }
+            .parallax-content h2 { font-size: 2.5rem; }
+            .products-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-main { grid-template-columns: 1fr; padding: 40px 30px; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+            .cart-sidebar { width: 100%; right: -100%; }
+            .featured-banner { height: auto; padding: 60px 0; }
+            .bottle-glow { width: 250px !important; height: 300px !important; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar { padding: 10px 15px; }
+            .logo-text .brand-name { font-size: 1.3rem; letter-spacing: 2px; }
+            .section { padding: 60px 15px; }
+            .hero-content h1 { font-size: 2rem; }
+            .categories-grid { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: 1fr; }
+            .features-bar { grid-template-columns: 1fr; }
+            .feature-item { border-right: none; border-bottom: 1px solid var(--border-color); }
+            .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Particle-like decorative dots */
+        .deco-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .deco-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
 </head>
 <body>
 
-  <main class="card">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+    <!-- ============ HEADER ============ -->
+    <header id="header">
+        <div class="top-bar">
+            ✦ FREE SHIPPING ON ORDERS OVER $150 — USE CODE: NOIR2024 ✦
+        </div>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 50 50">
+                        <!-- Custom Perfume Bottle Logo -->
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#e8d48b"/>
+                                <stop offset="50%" style="stop-color:#c9a84c"/>
+                                <stop offset="100%" style="stop-color:#a07c2a"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="20" y="5" width="10" height="5" rx="1" fill="url(#logoGrad)"/>
+                        <rect x="23" y="2" width="4" height="4" rx="1" fill="url(#logoGrad)"/>
+                        <path d="M15 10 L35 10 L38 45 Q38 48 35 48 L15 48 Q12 48 12 45 Z" fill="none" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                        <path d="M18 18 Q25 25 32 18" stroke="url(#logoGrad)" stroke-width="1" fill="none"/>
+                        <circle cx="25" cy="32" r="6" fill="none" stroke="url(#logoGrad)" stroke-width="1"/>
+                        <text x="25" y="35" text-anchor="middle" fill="url(#logoGrad)" font-size="7" font-family="serif">N</text>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">NOIR</span>
+                    <span class="brand-tagline">Essence</span>
+                </div>
+            </a>
 
-    <div class="content">
-      <div class="tag">✨ Premium Light Design</div>
-      <h1>Modern.<br>Clean.<br>Beautiful.</h1>
-      <p>Designed with clarity, elegance, and confidence. A soft professional aesthetic with bold typography and a premium pastel palette.</p>
-      <a href="#" class="btn">
-        Get Started
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#bestsellers">Bestsellers</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <button class="nav-icon" onclick="toggleSearch()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+                <button class="nav-icon" onclick="toggleWishlist()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">3</span>
+                </button>
+                <button class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============ MOBILE MENU ============ -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <a href="#home" onclick="toggleMobileMenu()">Home</a>
+        <a href="#shop" onclick="toggleMobileMenu()">Shop</a>
+        <a href="#collections" onclick="toggleMobileMenu()">Collections</a>
+        <a href="#bestsellers" onclick="toggleMobileMenu()">Bestsellers</a>
+        <a href="#about" onclick="toggleMobileMenu()">About</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
     </div>
 
-    <div class="footer-note">
-      Soft palette • Large fonts • Professional style
+    <!-- ============ SEARCH OVERLAY ============ -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="close-search" onclick="toggleSearch()">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="search-container">
+            <input type="text" placeholder="Search perfumes..." autofocus>
+        </div>
     </div>
-  </main>
 
+    <!-- ============ CART SIDEBAR ============ -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag (3)</h3>
+            <button class="cart-close" onclick="toggleCart()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="cart-items">
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <svg viewBox="0 0 30 60"><rect x="10" y="2" width="10" height="5" rx="1" fill="#c9a84c"/><rect x="12" y="0" width="6" height="3" rx="1" fill="#c9a84c"/><path d="M5 7 L25 7 L27 55 Q27 58 24 58 L6 58 Q3 58 3 55 Z" fill="#c9a84c" opacity="0.6"/></svg>
+                </div>
+                <div class="cart-item-details">
+                    <span class="item-brand">Noir Essence</span>
+                    <h4>Midnight Velvet</h4>
+                    <div class="cart-item-qty">
+                        <button>−</button>
+                        <span>1</span>
+                        <button>+</button>
+                    </div>
+                </div>
+                <div style="text-align:right;">
+                    <div class="cart-item-price">$195</div>
+                    <button class="cart-item-remove">Remove</button>
+                </div>
+            </div>
+            <div class="cart-item">
+                <div class="cart-item-image" style="background: linear-gradient(135deg, #100a1a, #201535);">
+                    <svg viewBox="0 0 30 60"><rect x="10" y="2" width="10" height="5" rx="1" fill="#c9a84c"/><rect x="12" y="0" width="6" height="3" rx="1" fill="#c9a84c"/><path d="M5 7 L25 7 L27 55 Q27 58 24 58 L6 58 Q3 58 3 55 Z" fill="#c9a84c" opacity="0.6"/></svg>
+                </div>
+                <div class="cart-item-details">
+                    <span class="item-brand">L'Ombre</span>
+                    <h4>Rose Noire</h4>
+                    <div class="cart-item-qty">
+                        <button>−</button>
+                        <span>2</span>
+                        <button>+</button>
+                    </div>
+                </div>
+                <div style="text-align:right;">
+                    <div class="cart-item-price">$340</div>
+                    <button class="cart-item-remove">Remove</button>
+                </div>
+            </div>
+            <div class="cart-item">
+                <div class="cart-item-image" style="background: linear-gradient(135deg, #1a100a, #251a15);">
+                    <svg viewBox="0 0 30 60"><rect x="10" y="2" width="10" height="5" rx="1" fill="#c9a84c"/><rect x="12" y="0" width="6" height="3" rx="1" fill="#c9a84c"/><path d="M5 7 L25 7 L27 55 Q27 58 24 58 L6 58 Q3 58 3 55 Z" fill="#c9a84c" opacity="0.6"/></svg>
+                </div>
+                <div class="cart-item-details">
+                    <span class="item-brand">Aura</span>
+                    <h4>Oud Imperial</h4>
+                    <div class="cart-item-qty">
+                        <button>−</button>
+                        <span>1</span>
+                        <button>+</button>
+                    </div>
+                </div>
+                <div style="text-align:right;">
+                    <div class="cart-item-price">$280</div>
+                    <button class="cart-item-remove">Remove</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Subtotal</span>
+                <span>$815.00</span>
+            </div>
+            <a href="#" class="btn btn-primary" style="display:block;text-align:center;">Checkout</a>
+            <a href="#" class="btn btn-secondary" style="display:block;text-align:center;margin-top:10px;">View Cart</a>
+        </div>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="deco-dots">
+                    <div class="deco-dot" style="top:20%;left:10%;animation-delay:0s;"></div>
+                    <div class="deco-dot" style="top:40%;left:85%;animation-delay:1s;"></div>
+                    <div class="deco-dot" style="top:70%;left:25%;animation-delay:2s;"></div>
+                    <div class="deco-dot" style="top:30%;left:60%;animation-delay:0.5s;"></div>
+                    <div class="deco-dot" style="top:80%;left:75%;animation-delay:1.5s;"></div>
+                </div>
+            </div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+
+        <!-- Decorative Bottles -->
+        <div class="hero-bottle hero-bottle-left">
+            <svg viewBox="0 0 100 200" fill="none" opacity="0.15">
+                <rect x="35" y="10" width="30" height="15" rx="3" stroke="#c9a84c" stroke-width="1"/>
+                <rect x="42" y="2" width="16" height="12" rx="3" stroke="#c9a84c" stroke-width="1"/>
+                <path d="M20 25 L80 25 L85 185 Q85 195 75 195 L25 195 Q15 195 15 185 Z" stroke="#c9a84c" stroke-width="1.5"/>
+                <ellipse cx="50" cy="120" rx="25" ry="30" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+            </svg>
+        </div>
+        <div class="hero-bottle hero-bottle-right">
+            <svg viewBox="0 0 100 200" fill="none" opacity="0.15">
+                <rect x="38" y="8" width="24" height="12" rx="2" stroke="#c9a84c" stroke-width="1"/>
+                <rect x="43" y="0" width="14" height="10" rx="2" stroke="#c9a84c" stroke-width="1"/>
+                <path d="M25 20 L75 20 L78 180 Q78 190 68 190 L32 190 Q22 190 22 180 Z" stroke="#c9a84c" stroke-width="1.5"/>
+                <circle cx="50" cy="110" r="20" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <p class="subtitle">Discover the Art of Fragrance</p>
+            <h1>The Essence of Luxury</h1>
+            <p>Handcrafted perfumes from the world's finest ingredients. Each scent tells a story of elegance, mystery, and timeless beauty.</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn btn-primary">Explore Collection</a>
+                <a href="#about" class="btn btn-secondary">Our Story</a>
+            </div>
+        </div>
+
+        <div class="hero-indicators">
+            <div class="hero-indicator active" onclick="goToSlide(0)"></div>
+            <div class="hero-indicator" onclick="goToSlide(1)"></div>
+            <div class="hero-indicator" onclick="goToSlide(2)"></div>
+        </div>
+
+        <div class="scroll-down">
+            <svg viewBox="0 0 24 24"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+        </div>
+    </section>
+
+    <!-- ============ FEATURES BAR ============ -->
+    <div class="features-bar">
+        <div class="feature-item">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div class="feature-text">
+                <h4>Free Shipping</h4>
+                <p>On orders over $150</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="feature-text">
+                <h4>Authentic Products</h4>
+                <p>100% guaranteed genuine</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <div class="feature-text">
+                <h4>Gift Wrapping</h4>
+                <p>Luxury packaging included</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <div class="feature-text">
+                <h4>Easy Returns</h4>
+                <p>30-day return policy</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ CATEGORIES ============ -->
+    <section class="section categories" id="collections">
+        <div class="section-header animate-on-scroll">
+            <p class="section-subtitle">Browse by Category</p>
+            <h2>Our Collections</h2>
+            <div class="section-line"></div>
+            <p>Curated collections for every mood and occasion</p>
+        </div>
+
+        <div class="categories-grid">
+            <div class="category-card animate-on-scroll">
+                <div class="category-bg"></div>
+                <div class="category-icon">
+                    <svg viewBox="0 0 80 80"><path d="M40 10 C20 10 10 25 10 40 C10 55 25 70 40 70 C55 70 70 55 70 40 C70 25 60 10 40 10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M30 35 Q40 20 50 35" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="40" cy="45" r="8" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+                </div>
+                <div class="category-info">
+                    <h3>For Her</h3>
+                    <p>48 FRAGRANCES</p>
+                </div>
+            </div>
+            <div class="category-card animate-on-scroll">
+                <div class="category-bg"></div>
+                <div class="category-icon">
+                    <svg viewBox="0 0 80 80"><rect x="20" y="15" width="40" height="50" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="30" y="8" width="20" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1"/><line x1="20" y1="30" x2="60" y2="30" stroke="currentColor" stroke-width="0.5"/></svg>
+                </div>
+                <div class="category-info">
+                    <h3>For Him</h3>
+                    <p>36 FRAGRANCES</p>
+                </div>
+            </div>
+            <div class="category-card animate-on-scroll">
+                <div class="category-bg"></div>
+                <div class="category-icon">
+                    <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="40" cy="40" r="15" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="40" cy="40" r="5" fill="currentColor" opacity="0.3"/></svg>
+                </div>
+                <div class="category-info">
+                    <h3>Unisex</h3>
+                    <p>24 FRAGRANCES</p>
+                </div>
+            </div>
+            <div class="category-card animate-on-scroll">
+                <div class="category-bg"></div>
+                <div class="category-icon">
+                    <svg viewBox="0 0 80 80"><path d="M20 60 L40 15 L60 60 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="28" y1="45" x2="52" y2="45" stroke="currentColor" stroke-width="1"/><circle cx="40" cy="50" r="4" fill="currentColor" opacity="0.3"/></svg>
+                </div>
+                <div class="category-info">
+                    <h3>Exclusive</h3>
+                    <p>12 FRAGRANCES</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FEATURED BIG BANNER ============ -->
+    <section class="featured-banner">
+        <div class="featured-content">
+            <div class="featured-text">
+                <span class="label">New Arrival</span>
+                <h2>Midnight Velvet Eau de Parfum</h2>
+                <p>A captivating blend of black orchid, smoky vetiver, and golden amber. An enigmatic fragrance that lingers in the memory long after you've left the room.</p>
+                <p style="font-size:0.85rem;"><strong style="color:var(--gold);">Top Notes:</strong> Bergamot, Black Pepper<br>
+                <strong style="color:var(--gold);">Heart Notes:</strong> Black Orchid, Jasmine<br>
+                <strong style="color:var(--gold);">Base Notes:</strong> Vetiver, Amber, Musk</p>
+                <div class="featured-price">$195.00 <span>$250.00</span></div>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+            <div class="featured-image">
+                <div class="bottle-glow">
+                    <div class="bottle-placeholder">
+                        <svg viewBox="0 0 120 280" fill="none">
+                            <defs>
+                                <linearGradient id="bottleGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#e8d48b;stop-opacity:0.8"/>
+                                    <stop offset="50%" style="stop-color:#c9a84c;stop-opacity:0.6"/>
+                                    <stop offset="100%" style="stop-color:#a07c2a;stop-opacity:0.8"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Cap -->
+                            <rect x="40" y="5" width="40" height="25" rx="5" fill="url(#bottleGrad1)"/>
+                            <rect x="48" y="0" width="24" height="10" rx="4" fill="url(#bottleGrad1)" opacity="0.8"/>
+                            <!-- Neck -->
+                            <rect x="45" y="30" width="30" height="20" fill="url(#bottleGrad1)" opacity="0.4"/>
+                            <!-- Body -->
+                            <path d="M25 50 L95 50 L100 250 Q100 270 80 270 L40 270 Q20 270 20 250 Z" fill="url(#bottleGrad1)" opacity="0.3" stroke="url(#bottleGrad1)" stroke-width="1.5"/>
+                            <!-- Label area -->
+                            <rect x="35" y="120" width="50" height="60" rx="3" fill="none" stroke="url(#bottleGrad1)" stroke-width="0.8"/>
+                            <text x="60" y="148" text-anchor="middle" fill="#c9a84c" font-family="serif" font-size="14" font-weight="bold">NOIR</text>
+                            <text x="60" y="165" text-anchor="middle" fill="#c9a84c" font-family="serif" font-size="8">ESSENCE</text>
+                            <!-- Shine -->
+                            <line x1="35" y1="55" x2="35" y2="245" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="85" y1="55" x2="85" y2="245" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PRODUCTS GRID ============ -->
+    <section class="section products" id="shop">
+        <div class="section-header animate-on-scroll">
+            <p class="section-subtitle">Curated Selection</p>
+            <h2>Our Fragrances</h2>
+            <div class="section-line"></div>
+            <p>Discover scents crafted from the finest ingredients around the world</p>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterProducts(this, 'all')">All</button>
+            <button class="filter-tab" onclick="filterProducts(this, 'women')">Women</button>
+            <button class="filter-tab" onclick="filterProducts(this, 'men')">Men</button>
+            <button class="filter-tab" onclick="filterProducts(this, 'unisex')">Unisex</button>
+            <button class="filter-tab" onclick="filterProducts(this, 'new')">New Arrivals</button>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card animate-on-scroll">
+                <span class="product-badge">New</span>
+                <button class="product-wishlist" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #1a0a1a, #2a1540);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="20" y="5" width="20" height="10" rx="2" fill="#c9a84c" opacity="0.7"/>
+                        <rect x="24" y="0" width="12" height="8" rx="2" fill="#c9a84c" opacity="0.6"/>
+                        <path d="M10 15 L50 15 L52 115 Q52 125 42 125 L18 125 Q8 125 8 115 Z" fill="#c9a84c" opacity="0.25" stroke="#c9a84c" stroke-width="1"/>
+                        <text x="30" y="75" text-anchor="middle" fill="#c9a84c" font-size="7" font-family="serif">N</text>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Midnight Velvet', 195)">Add to Bag</button>
+                        <button class="quick-view" onclick="quickView('Midnight Velvet')">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">Noir Essence</p>
+                    <h3 class="product-name">Midnight Velvet</h3>
+                    <p class="product-notes">Black Orchid · Vetiver · Amber</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(128)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$195</span>
+                        <span class="original">$250</span>
+                    </div>
+                    <p class="product-size">100ml / 3.4 fl oz</p>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card animate-on-scroll">
+                <button class="product-wishlist" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #200a10, #351525);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="20" y="5" width="20" height="10" rx="2" fill="#8b3a4a" opacity="0.7"/>
+                        <rect x="24" y="0" width="12" height="8" rx="2" fill="#8b3a4a" opacity="0.6"/>
+                        <path d="M10 15 L50 15 L52 115 Q52 125 42 125 L18 125 Q8 125 8 115 Z" fill="#8b3a4a" opacity="0.25" stroke="#8b3a4a" stroke-width="1"/>
+                        <circle cx="30" cy="70" r="12" fill="none" stroke="#8b3a4a" stroke-width="0.8"/>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Rose Noire', 170)">Add to Bag</button>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">L'Ombre</p>
+                    <h3 class="product-name">Rose Noire</h3>
+                    <p class="product-notes">Bulgarian Rose · Saffron · Oud</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(94)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$170</span>
+                    </div>
+                    <p class="product-size">75ml / 2.5 fl oz</p>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card animate-on-scroll">
+                <span class="product-badge" style="background:var(--accent-rose);color:white;">Sale</span>
+                <button class="product-wishlist" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #0a1515, #153030);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="22" y="5" width="16" height="8" rx="2" fill="#4a8b6b" opacity="0.7"/>
+                        <rect x="25" y="0" width="10" height="7" rx="2" fill="#4a8b6b" opacity="0.6"/>
+                        <path d="M12 13 L48 13 L50 115 Q50 125 40 125 L20 125 Q10 125 10 115 Z" fill="#4a8b6b" opacity="0.2" stroke="#4a8b6b" stroke-width="1"/>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Jade Garden', 145)">Add to Bag</button>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">Verde</p>
+                    <h3 class="product-name">Jade Garden</h3>
+                    <p class="product-notes">Green Tea · Bamboo · White Musk</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(76)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$145</span>
+                        <span class="original">$210</span>
+                    </div>
+                    <p class="product-size">100ml / 3.4 fl oz</p>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card animate-on-scroll">
+                <button class="product-wishlist" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #1a1508, #302a15);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="18" y="3" width="24" height="12" rx="3" fill="#c9a84c" opacity="0.7"/>
+                        <rect x="23" y="0" width="14" height="6" rx="2" fill="#c9a84c" opacity="0.6"/>
+                        <path d="M8 15 L52 15 L54 115 Q54 125 44 125 L16 125 Q6 125 6 115 Z" fill="#c9a84c" opacity="0.2" stroke="#c9a84c" stroke-width="1"/>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Oud Imperial', 280)">Add to Bag</button>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">Aura</p>
+                    <h3 class="product-name">Oud Imperial</h3>
+                    <p class="product-notes">Oud · Sandalwood · Vanilla</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(201)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$280</span>
+                    </div>
+                    <p class="product-size">50ml / 1.7 fl oz</p>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card animate-on-scroll">
+                <span class="product-badge">Bestseller</span>
+                <button class="product-wishlist active" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #150a1a, #251540);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="20" y="5" width="20" height="10" rx="2" fill="#6b4a8b" opacity="0.7"/>
+                        <rect x="24" y="0" width="12" height="8" rx="2" fill="#6b4a8b" opacity="0.6"/>
+                        <path d="M10 15 L50 15 L52 115 Q52 125 42 125 L18 125 Q8 125 8 115 Z" fill="#6b4a8b" opacity="0.25" stroke="#6b4a8b" stroke-width="1"/>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Iris Mystique', 220)">Add to Bag</button>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">Mystica</p>
+                    <h3 class="product-name">Iris Mystique</h3>
+                    <p class="product-notes">Iris · Violet · Cashmere Wood</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(156)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$220</span>
+                    </div>
+                    <p class="product-size">100ml / 3.4 fl oz</p>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card animate-on-scroll">
+                <button class="product-wishlist" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #1a0a08, #301510);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="20" y="5" width="20" height="10" rx="2" fill="#8b6b4a" opacity="0.7"/>
+                        <rect x="24" y="0" width="12" height="8" rx="2" fill="#8b6b4a" opacity="0.6"/>
+                        <path d="M10 15 L50 15 L52 115 Q52 125 42 125 L18 125 Q8 125 8 115 Z" fill="#8b6b4a" opacity="0.25" stroke="#8b6b4a" stroke-width="1"/>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Amber Nocturne', 185)">Add to Bag</button>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">Sérénité</p>
+                    <h3 class="product-name">Amber Nocturne</h3>
+                    <p class="product-notes">Amber · Tobacco · Leather</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(89)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$185</span>
+                    </div>
+                    <p class="product-size">75ml / 2.5 fl oz</p>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card animate-on-scroll">
+                <span class="product-badge">Limited</span>
+                <button class="product-wishlist" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #0a0a1a, #15152a);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="20" y="5" width="20" height="10" rx="2" fill="#4a6b8b" opacity="0.7"/>
+                        <rect x="24" y="0" width="12" height="8" rx="2" fill="#4a6b8b" opacity="0.6"/>
+                        <path d="M10 15 L50 15 L52 115 Q52 125 42 125 L18 125 Q8 125 8 115 Z" fill="#4a6b8b" opacity="0.25" stroke="#4a6b8b" stroke-width="1"/>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Ocean Depths', 240)">Add to Bag</button>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">Aqua Noir</p>
+                    <h3 class="product-name">Ocean Depths</h3>
+                    <p class="product-notes">Sea Salt · Driftwood · Ambergris</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(112)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$240</span>
+                    </div>
+                    <p class="product-size">100ml / 3.4 fl oz</p>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card animate-on-scroll">
+                <button class="product-wishlist" onclick="toggleWishlistBtn(this)">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="product-image">
+                    <div class="product-bg" style="background: linear-gradient(135deg, #1a0a10, #2a1520);"></div>
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="20" y="5" width="20" height="10" rx="2" fill="#8b4a6b" opacity="0.7"/>
+                        <rect x="24" y="0" width="12" height="8" rx="2" fill="#8b4a6b" opacity="0.6"/>
+                        <path d="M10 15 L50 15 L52 115 Q52 125 42 125 L18 125 Q8 125 8 115 Z" fill="#8b4a6b" opacity="0.25" stroke="#8b4a6b" stroke-width="1"/>
+                    </svg>
+                    <div class="product-actions">
+                        <button onclick="addToCart('Cherry Blossom', 160)">Add to Bag</button>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-brand">Fleur</p>
+                    <h3 class="product-name">Cherry Blossom</h3>
+                    <p class="product-notes">Sakura · Peony · White Tea</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(67)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current">$160</span>
+                    </div>
+                    <p class="product-size">50ml / 1.7 fl oz</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:50px;">
+            <a href="#" class="btn btn-secondary">View All Products</a>
+        </div>
+    </section>
+
+    <!-- ============ BIG PARALLAX QUOTE ============ -->
+    <section class="parallax-section">
+        <div class="deco-dots">
+            <div class="deco-dot" style="top:15%;left:20%;width:3px;height:3px;animation-delay:0s;"></div>
+            <div class="deco-dot" style="top:45%;left:80%;width:3px;height:3px;animation-delay:1s;"></div>
+            <div class="deco-dot" style="top:75%;left:40%;width:3px;height:3px;animation-delay:2s;"></div>
+            <div class="deco-dot" style="top:25%;left:65%;width:3px;height:3px;animation-delay:0.5s;"></div>
+            <div class="deco-dot" style="top:85%;left:15%;width:3px;height:3px;animation-delay:1.5s;"></div>
+        </div>
+        <div class="parallax-content animate-on-scroll">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.5rem;color:var(--gold);margin-bottom:10px;">A Scent is</p>
+            <h2>"The Most Intense Form<br>of Memory"</h2>
+            <p>— Jean Paul Guerlain</p>
+            <a href="#shop" class="btn btn-primary" style="margin-top:10px;">Discover Your Scent</a>
+        </div>
+    </section>
+
+    <!-- ============ BESTSELLERS ============ -->
+    <section class="section bestsellers" id="bestsellers">
+        <div class="section-header animate-on-scroll">
+            <p class="section-subtitle">Most Loved</p>
+            <h2>Bestsellers</h2>
+            <div class="section-line"></div>
+            <p>Our most popular fragrances chosen by discerning perfume lovers worldwide</p>
+        </div>
+
+        <div class="bestseller-grid">
+            <div class="bestseller-card animate-on-scroll">
+                <div class="bs-image" style="background: linear-gradient(135deg, #1a0a1a, #2a1535);">
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="20" y="5" width="20" height="10" rx="2" fill="#c9a84c" opacity="0.7"/>
+                        <rect x="24" y="0" width="12" height="8" rx="2" fill="#c9a84c" opacity="0.6"/>
+                        <path d="M10 15 L50 15 L52 115 Q52 125 42 125 L18 125 Q8 125 8 115 Z" fill="#c9a84c" opacity="0.25" stroke="#c9a84c" stroke-width="1"/>
+                        <text x="30" y="75" text-anchor="middle" fill="#c9a84c" font-size="7" font-family="serif">N</text>
+                    </svg>
+                </div>
+                <div class="bs-info">
+                    <div class="bs-rank">#1</div>
+                    <p class="bs-brand">Noir Essence</p>
+                    <h3 class="bs-name">Midnight Velvet</h3>
+                    <p class="bs-desc">A deeply seductive fragrance with notes of black orchid, smoky vetiver, and golden amber that captivates from first spray.</p>
+                    <div class="bs-price">$195.00</div>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+
+            <div class="bestseller-card animate-on-scroll">
+                <div class="bs-image" style="background: linear-gradient(135deg, #1a1508, #302a15);">
+                    <svg viewBox="0 0 60 130" fill="none">
+                        <rect x="18" y="3" width="24" height="12" rx="3" fill="#c9a84c" opacity="0.7"/>
+                        <rect x="23" y="0" width="14" height="6" rx="2" fill="#c9a84c" opacity="0.6"/>
+                        <path d="M8 15 L52 15 L54 115 Q54 125 44 125 L16 125 Q6 125 6 115 Z" fill="#c9a84c" opacity="0.2" stroke="#c9a84c" stroke-width="1"/>
+                    </svg>
+                </div>
+                <div class="bs-info">
+                    <div class="bs-rank">#2</div>
+                    <p class="bs-brand">Aura</p>
+                    <h3 class="bs-name">Oud Imperial</h3>
+                    <p class="bs-desc">Rich, warm, and unforgettable. Rare Laotian oud blended with precious sandalwood and creamy vanilla creates pure luxury.</p>
+                    <div class="bs-price">$280.00</div>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BRAND STORY ============ -->
+    <section class="brand-story" id="about">
+        <div class="brand-story-image">
+            <svg viewBox="0 0 200 300" fill="none">
+                <rect x="70" y="20" width="60" height="25" rx="5" stroke="#c9a84c" stroke-width="1.5" opacity="0.5"/>
+                <rect x="82" y="5" width="36" height="20" rx="5" stroke="#c9a84c" stroke-width="1" opacity="0.4"/>
+                <path d="M40 45 L160 45 L170 270 Q170 290 150 290 L50 290 Q30 290 30 270 Z" stroke="#c9a84c" stroke-width="1.5" opacity="0.4"/>
+                <rect x="65" y="130" width="70" height="50" rx="3" stroke="#c9a84c" stroke-width="0.8" opacity="0.3"/>
+                <text x="100" y="158" text-anchor="middle" fill="#c9a84c" font-family="serif" font-size="18" opacity="0.4">NOIR</text>
+                <text x="100" y="172" text-anchor="middle" fill="#c9a84c" font-family="serif" font-size="8" opacity="0.3">ESSENCE</text>
+                <circle cx="100" cy="210" r="20" stroke="#c9a84c" stroke-width="0.5" opacity="0.2"/>
+            </svg>
+        </div>
+        <div class="brand-story-text">
+            <div class="content animate-on-scroll">
+                <p class="subtitle">Our Heritage</p>
+                <h2>Crafting Memories Since 1987</h2>
+                <p>Founded in the heart of Grasse, France, Noir Essence began as a small artisan perfume house dedicated to the ancient art of fragrance creation. Our master perfumers travel the globe sourcing the rarest ingredients.</p>
+                <p>Each fragrance in our collection is meticulously composed over months, sometimes years, ensuring every note harmonizes to create an unforgettable olfactory experience.</p>
+                <p>We believe that a great perfume is more than a scent — it's an invisible accessory that completes who you are.</p>
+                <div class="brand-stats">
+                    <div class="brand-stat">
+                        <h3>37+</h3>
+                        <p>Years of Craft</p>
+                    </div>
+                    <div class="brand-stat">
+                        <h3>120+</h3>
+                        <p>Fragrances</p>
+                    </div>
+                    <div class="brand-stat">
+                        <h3>50K+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top:30px;">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section testimonials">
+        <div class="section-header animate-on-scroll">
+            <p class="section-subtitle">What Our Clients Say</p>
+            <h2>Testimonials</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card animate-on-scroll">
+                <div class="quote-icon">"</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Midnight Velvet is absolutely divine. I receive compliments every single time I wear it. The longevity is incredible — it lasts the entire day. This has become my signature scent.</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">S</div>
+                    <div class="reviewer-info">
+                        <p class="reviewer-name">Sophia Laurent</p>
+                        <p class="reviewer-title">Verified Buyer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card animate-on-scroll">
+                <div class="quote-icon">"</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">The packaging alone is worth the price. But the fragrance? Oud Imperial is the most sophisticated scent I've ever owned. It evolves beautifully throughout the day.</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">M</div>
+                    <div class="reviewer-info">
+                        <p class="reviewer-name">Marcus Chen</p>
+                        <p class="reviewer-title">Verified Buyer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card animate-on-scroll">
+                <div class="quote-icon">"</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">I ordered Rose Noire as a gift and ended up keeping it for myself. The blend of rose and oud is perfectly balanced — not too floral, not too woody. Pure perfection.</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">E</div>
+                    <div class="reviewer-info">
+                        <p class="reviewer-name">Elena Rossi</p>
+                        <p class="reviewer-title">Verified Buyer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
+    <section class="newsletter" id="contact">
+        <h2>Join the Noir Circle</h2>
+        <p>Subscribe for exclusive access to new releases, limited editions, and special offers</p>
+        <form class="newsletter-form" onsubmit="subscribe(event)">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- ============ INSTAGRAM FEED ============ -->
+    <section class="instagram-section">
+        <div class="section-header">
+            <p class="section-subtitle">Follow Us</p>
+            <h2>@NoirEssence</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="instagram-grid">
+            <div class="instagram-item">
+                <div class="ig-bg"></div>
+                <div class="ig-overlay">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="18" cy="6" r="1" fill="white"/></svg>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <div class="ig-bg"></div>
+                <div class="ig-overlay">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="18" cy="6" r="1" fill="white"/></svg>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <div class="ig-bg"></div>
+                <div class="ig-overlay">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="18" cy="6" r="1" fill="white"/></svg>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <div class="ig-bg"></div>
+                <div class="ig-overlay">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="18" cy="6" r="1" fill="white"/></svg>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <div class="ig-bg"></div>
+                <div class="ig-overlay">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="18" cy="6" r="1" fill="white"/></svg>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <div class="ig-bg"></div>
+                <div class="ig-overlay">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="18" cy="6" r="1" fill="white"/></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 50 50">
+                            <rect x="20" y="5" width="10" height="5" rx="1" fill="url(#logoGrad)"/>
+                            <rect x="23" y="2" width="4" height="4" rx="1" fill="url(#logoGrad)"/>
+                            <path d="M15 10 L35 10 L38 45 Q38 48 35 48 L15 48 Q12 48 12 45 Z" fill="none" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                            <path d="M18 18 Q25 25 32 18" stroke="url(#logoGrad)" stroke-width="1" fill="none"/>
+                            <circle cx="25" cy="32" r="6" fill="none" stroke="url(#logoGrad)" stroke-width="1"/>
+                            <text x="25" y="35" text-anchor="middle" fill="url(#logoGrad)" font-size="7" font-family="serif">N</text>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="brand-name">NOIR</span>
+                        <span class="brand-tagline">Essence</span>
+                    </div>
+                </a>
+                <p>Crafting extraordinary fragrances since 1987. Each perfume is a masterpiece of olfactory art, blending tradition with modern luxury.</p>
+                <div class="social-links">
+                    <div class="social-link">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </div>
+                    <div class="social-link">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="18" cy="6" r="1"/></svg>
+                    </div>
+                    <div class="social-link">
+                        <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+                    </div>
+                    <div class="social-link">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Bestsellers</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h4>Get in Touch</h4>
+                <p>
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    42 Rue de la Paix, Paris 75002
+                </p>
+                <p>
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    +33 1 42 86 87 88
+                </p>
+                <p>
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    contact@noiressence.com
+                </p>
+                <p>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Mon - Sat: 10AM - 8PM
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 Noir Essence. All rights reserved. Crafted with ♦ in Paris.</p>
+            <div class="payment-methods">
+                <span>VISA</span>
+                <span>MASTERCARD</span>
+                <span>AMEX</span>
+                <span>PAYPAL</span>
+                <span>APPLE PAY</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ BACK TO TOP ============ -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    <!-- ============ JAVASCRIPT ============ -->
+    <script>
+        // ===== HEADER SCROLL =====
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // ===== HERO SLIDER =====
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.hero-indicator');
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        setInterval(() => {
+            goToSlide((currentSlide + 1) % slides.length);
+        }, 5000);
+
+        // ===== SEARCH OVERLAY =====
+        function toggleSearch() {
+            const overlay = document.getElementById('searchOverlay');
+            overlay.classList.toggle('active');
+            if (overlay.classList.contains('active')) {
+                overlay.querySelector('input').focus();
+            }
+        }
+
+        // ===== CART SIDEBAR =====
+        function toggleCart() {
+            const overlay = document.getElementById('cartOverlay');
+            const sidebar = document.getElementById('cartSidebar');
+            overlay.classList.toggle('active');
+            sidebar.classList.toggle('active');
+        }
+
+        // ===== MOBILE MENU =====
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // ===== WISHLIST TOGGLE =====
+        function toggleWishlistBtn(btn) {
+            btn.classList.toggle('active');
+        }
+
+        function toggleWishlist() {
+            alert('Wishlist feature - Coming soon!');
+        }
+
+        // ===== ADD TO CART =====
+        let cartItems = 3;
+        function addToCart(name, price) {
+            cartItems++;
+            document.getElementById('cartCount').textContent = cartItems;
+            
+            // Show a brief notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #111;
+                border: 1px solid #c9a84c;
+                color: #f5f5f5;
+                padding: 20px 25px;
+                z-index: 3000;
+                font-family: 'Raleway', sans-serif;
+                font-size: 0.9rem;
+                animation: fadeInUp 0.3s ease;
+                max-width: 300px;
+            `;
+            notification.innerHTML = `
+                <strong style="color:#c9a84c;">Added to Bag!</strong><br>
+                <span style="color:#888;">${name} — $${price}</span>
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 2500);
+        }
+
+        // ===== QUICK VIEW =====
+        function quickView(name) {
+            alert(`Quick View: ${name}\n\nThis would open a modal with product details.`);
+        }
+
+        // ===== FILTER PRODUCTS =====
+        function filterProducts(btn, category) {
+            document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+            btn.classList.add('active');
+            // In a real implementation, this would filter the products
+        }
+
+        // ===== NEWSLETTER =====
+        function subscribe(e) {
+            e.preventDefault();
+            const input = e.target.querySelector('input');
+            const email = input.value;
+            
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #111;
+                border: 1px solid #c9a84c;
+                color: #f5f5f5;
+                padding: 40px 50px;
+                z-index: 3000;
+                font-family: 'Raleway', sans-serif;
+                text-align: center;
+                max-width: 400px;
+            `;
+            notification.innerHTML = `
+                <p style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#c9a84c;margin-bottom:10px;">Welcome!</p>
+                <p style="color:#888;">Thank you for subscribing. Check your inbox for a special welcome offer.</p>
+            `;
+            document.body.appendChild(notification);
+            input.value = '';
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // ===== SCROLL TO TOP =====
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ===== SCROLL ANIMATIONS =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== CLOSE OVERLAYS WITH ESC =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('searchOverlay').classList.remove('active');
+                document.getElementById('cartOverlay').classList.remove('active');
+                document.getElementById('cartSidebar').classList.remove('active');
+                document.getElementById('mobileMenu').classList.remove('active');
+            }
+        });
+
+        // ===== SMOOTH SCROLL FOR NAV LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
